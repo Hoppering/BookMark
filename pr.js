@@ -100,7 +100,7 @@ function buildEnrollExtensions(requireLargeBlobSupport) {
   }
 }
 
-function buildLoginExtensions(mode, textToWrite = 'ORNS Secret :)') {
+function buildLoginExtensions(mode, textToWrite = 'UEK Secret') {
   if (mode === LargeBlobMode.None) {
     return {};
   } else if (mode === LargeBlobMode.Write) {
