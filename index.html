@@ -12,27 +12,16 @@
 
 <body>
   <div id="contents">
-    <h1>Secure Payment Confirmation (WebAuthn Extension Large Blob)</h1>
-    <p>This is a test website. Nothing is charged.</p>
+    <h1>Демо УЭК</h1>
     </pre>
     <p><button
           onclick="createPaymentCredential(
             'Credential #1', /* requireLargeBlobSupport= */ true)">
-      Enroll with Large Blob Support</button>
-    <p>
-      <button
-        onclick="onBuyClicked('Credential #1', LargeBlobMode.Write)">
-        Pay $0.01 and write largeBlob "SecurePaymentConfirmation"</button>
-      </p>
-    <p>
-      <button
-        onclick="onBuyClicked('Credential #1', LargeBlobMode.Read)">
-        Pay $0.01 and read largeBlob</button>
-      </p>
+      Создать ключ</button>
     <p><button onclick="webAuthnGet('Credential #1', LargeBlobMode.Write)">
-      Login and write largeBlob "WebAuthn"</button></p>
+      Записать секрет</button></p>
     <p><button onclick="webAuthnGet('Credential #1', LargeBlobMode.Read)">
-      Login and read largeBlob</button></p>
+      Прочитать секрет</button></p>
   </div>
   <pre id="msg"></pre>
   <script src="util.js"></script>
