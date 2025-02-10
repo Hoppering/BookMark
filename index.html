@@ -1,33 +1,106 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Secure Payment Confirmation (WebAuthn Extension Large Blob)</title>
+  <title>Демо УЭК Keychain в PWA</title>
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" href="../style.css">
+  <style>
+    /* Общие стили */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0f8f0;
+    }
+
+    #contents {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Стили для кнопок */
+    button {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px 0;
+      width: 100%;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #1b5e20;
+    }
+
+    /* Стили для текстового поля */
+    #secretInput {
+      width: calc(100% - 24px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #81c784;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    /* Адаптивность */
+    @media (min-width: 768px) {
+      button {
+        width: auto;
+        padding: 12px 30px;
+      }
+    }
+
+    /* Футер */
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #2e7d32;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 
 <body>
   <div id="contents">
     <h1>Демо УЭК</h1>
-    </pre>
-    <p><button
-          onclick="createPaymentCredential(
-            'Credential #1', /* requireLargeBlobSupport= */ true)">
-      Создать ключ</button>
-    <p><button onclick="webAuthnGet('Credential #1', LargeBlobMode.Write)">
-      Записать секрет</button></p>
-    <p><button onclick="webAuthnGet('Credential #1', LargeBlobMode.Read)">
-      Прочитать секрет</button></p>
+    
+    <!-- Поле для ввода секрета -->
+    <input type="text" id="secretInput" 
+           placeholder="Введите ваш секрет (до 255 символов)" 
+           maxlength="255">
+    
+    <!-- Кнопки -->
+    <button onclick="createPaymentCredential('Credential #1', true)">
+      Создать ключ
+    </button>
+    
+    <button onclick="webAuthnGet('Credential #1', LargeBlobMode.Write)">
+      Записать секрет
+    </button>
+    
+    <button onclick="webAuthnGet('Credential #1', LargeBlobMode.Read)">
+      Прочитать секрет
+    </button>
   </div>
+
   <pre id="msg"></pre>
+  
+  <!-- Добавлен футер -->
+  <footer>Разработано в УЭК</footer>
+
   <script src="util.js"></script>
   <script src="spc_util.js"></script>
   <script src="pr.js"></script>
   <script src="redirect.js"></script>
 </body>
-
 </html>
