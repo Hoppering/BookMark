@@ -2,7 +2,7 @@
 /* exported onBuyClicked */
 
 /**
- * Creates a payment credential.
+ * Создает платежный ключ.
  */
 async function createPaymentCredential(
     windowLocalStorageIdentifier,
@@ -26,7 +26,7 @@ async function createPaymentCredential(
 }
 
 /**
- * Launches payment request for SPC.
+ * Запускает платежный запрос для SPC.
  */
 async function onBuyClicked(
     windowLocalStorageIdentifier, largeBlobMode = LargeBlobMode.None) {
@@ -56,6 +56,9 @@ async function onBuyClicked(
   }
 }
 
+/**
+ * Получает данные WebAuthn.
+ */
 async function webAuthnGet(windowLocalStorageIdentifier, largeBlobMode) {
   try {
     const publicKey = {
@@ -82,12 +85,18 @@ async function webAuthnGet(windowLocalStorageIdentifier, largeBlobMode) {
   }
 }
 
+/**
+ * Режимы работы с большими бинарными данными.
+ */
 const LargeBlobMode = {
   None: 'None',
   Read: 'Read',
   Write: 'Write',
 };
 
+/**
+ * Создает расширения для регистрации.
+ */
 function buildEnrollExtensions(requireLargeBlobSupport) {
   if (requireLargeBlobSupport) {
     return {
@@ -100,11 +109,18 @@ function buildEnrollExtensions(requireLargeBlobSupport) {
   }
 }
 
+/**
+ * Создает расширения для входа.
+ */
 function buildLoginExtensions(mode, textToWrite = 'UEK Secret') {
+  // Получаем значение из текстового поля
+  const userInput = document.getElementById('secretInput').value;
+  textToWrite = userInput || 'Секрет по умолчанию'; // Запасной вариант
+
   if (mode === LargeBlobMode.None) {
     return {};
   } else if (mode === LargeBlobMode.Write) {
-    buffer = new TextEncoder().encode(textToWrite);
+    const buffer = new TextEncoder().encode(textToWrite);
     return {
       largeBlob: {
         write: buffer,
@@ -119,6 +135,9 @@ function buildLoginExtensions(mode, textToWrite = 'UEK Secret') {
   }
 }
 
+/**
+ * Преобразует результат расширений в строку.
+ */
 function extensionsOutputToString(credentialInfoAssertion) {
   const clientExtensionResults =
       credentialInfoAssertion.getClientExtensionResults();
